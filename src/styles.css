@@ -20,6 +20,10 @@ ha-card {
   border-radius: 4px 4px 0 0;
 }
 
+.preview.bin-full {
+  background: var(--error-color);
+}
+
 .preview.not-available {
   filter: grayscale(1);
 }

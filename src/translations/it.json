@@ -4,7 +4,8 @@
     "paused": "In pausa",
     "idle": "Inattivo",
     "charging": "In carica",
-    "returning home": "In rientro alla base"
+    "returning home": "In rientro alla base",
+    "bin_full": "Cassetto pieno"
   },
   "common": {
     "name": "Vacuum Card",

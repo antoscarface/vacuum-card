@@ -255,6 +255,7 @@ class VacuumCard extends LitElement {
       battery_level,
       battery_icon,
       friendly_name,
+      bin_full,
     } = entity.attributes;
 
     return {
@@ -264,6 +265,7 @@ class VacuumCard extends LitElement {
       battery_level,
       battery_icon,
       friendly_name,
+      bin_full,
     };
   }
 
@@ -297,6 +299,20 @@ class VacuumCard extends LitElement {
             </mwc-list-item>`
         )}
       </ha-button-menu>
+    `;
+  }
+
+  renderBinFull() {
+    const { bin_full } = this.getAttributes(this.entity);
+
+    if (!bin_full) {
+      return nothing;
+    }
+
+    return html`
+      <div class="bin-full">
+        ${localize('status.bin_full')}
+      </div>
     `;
   }
 
@@ -504,11 +520,17 @@ class VacuumCard extends LitElement {
     }
 
     const { state } = this.entity;
-    const { battery_level, battery_icon } = this.getAttributes(this.entity);
+    const { battery_level, battery_icon, bin_full } = this.getAttributes(
+      this.entity
+    );
 
     return html`
       <ha-card>
-        <div class="preview" @click="${this.handleMore}" ?more-info="true">
+        <div
+          class="preview ${bin_full ? 'bin-full' : ''}"
+          @click="${this.handleMore}"
+          ?more-info="true"
+        >
           <div class="header">
             <div class="source">
               ${this.renderSource()}
@@ -522,7 +544,7 @@ class VacuumCard extends LitElement {
           ${this.renderMapOrImage(state)}
 
           <div class="metadata">
-            ${this.renderName()} ${this.renderStatus()}
+            ${this.renderName()} ${this.renderStatus()} ${this.renderBinFull()}
           </div>
 
           <div class="stats">
